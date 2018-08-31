@@ -71,8 +71,17 @@ int Date::print_calendar(int month)
 {
     for (int i = 1; i <= daysInMonth[month]; i++)
     {
-        if (i % 7 == 0 && )
+        /*
+        if (i == 8)
+        {
             cout << "\n";
+        }
+        */
+
+        if (i >= 8 && i % 7 == 0)
+        {
+            cout << "\n";
+        }
         cout << i << "\t";
     }
 
