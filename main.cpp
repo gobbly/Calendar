@@ -1,11 +1,15 @@
 /* Calender for planning workload and assignments at university
 Mostly done to learn functions and classes and try to make something
 complete from scratch
+#include <chrono>
 */
 
 #include <iostream>
-#include <chrono>
 #include <sstream>
+#include <string>
+#include <vector>
+#include <iomanip>
+
 using namespace std;
 
 // Check lb-stuff.com/user-input
@@ -69,13 +73,48 @@ void Date::set_daysInMonth()
 
 int Date::print_calendar(int month)
 {
+    vector<string> weekday = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    cout << weekday[0] << "\t" << weekday[1] << "\t" << weekday[2] << "\t" << weekday[3] << "\t" << weekday[4] << "\t"
+    << weekday[5] << "\t" << weekday[6] << "\n";
+    int startDay;
+    startDay = daysInMonth[month] % 7;
+    switch (month) {
+        case 2:  cout << setw(startDay*8+1); break; 
+        case 3:  cout << setw(startDay*8+1); break; 
+        case 4:  cout << setw(startDay*8+1); break; 
+        case 5:  cout << setw(startDay*8+1); break; 
+        case 6:  cout << setw(startDay*8+1); break; 
+        case 7:  cout << setw(startDay*8+1); break; 
+        case 8:  cout << setw(startDay*8+1); break; 
+        case 9:  cout << setw(startDay*8+1); break; 
+        case 10: cout << setw(startDay*8+1); break; 
+        case 11: cout << setw(startDay*8+1); break; 
+        case 12: cout << setw(startDay*8+1); break; 
+    }
+    
     for (int i = 1; i <= daysInMonth[month]; i++)
     {
         cout << i << "\t";
-        if (i % 7 == 0)
+        if (i <= 7 && i % (startDay+1) == 0) 
+        {
             cout << "\n";
-    }
+        }
+        else if (i <= 14 && i % (startDay+8) == 0)
+        {
+            cout << "\n";
+        }
+        else if (i <= 21 && i % (startDay+15)  == 0)
+        {
+            cout << "\n";
+        }
+        
+        else if (i <= 28 && i % (startDay+22) == 0)
+        {
+            cout << "\n";
+        }
 
+    }
+    cout << "\n" << startDay;
 }
 
 int main() 
