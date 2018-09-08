@@ -48,7 +48,7 @@ bool Date::isLeapYear(int year)
 }
 
 // Set the correct amount of days for each month
-// See if it can be done better 
+//  TODO: Improve
 void Date::set_daysInMonth()
 {
     // OBS! [0] is not used, watch out for undefined behavior.
@@ -71,9 +71,9 @@ int Date::print_calendar(int month)
 {
     for (int i = 1; i <= daysInMonth[month]; i++)
     {
-        if (i % 7 == 0 && )
-            cout << "\n";
         cout << i << "\t";
+        if (i % 7 == 0)
+            cout << "\n";
     }
 
 }
