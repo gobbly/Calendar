@@ -14,7 +14,7 @@ using namespace std;
 class Date
 {
 public:
-    int day, month, year, startDay;
+    int month, year, startDay;
     int daysInMonth[12];
     void get_date();
     bool isLeapYear(int);
@@ -23,6 +23,7 @@ public:
     void add_plans(int, int, int);
     void change_plans(int, int, int);
     void delete_plans(int, int, int);
+    void options(int, int);
 };
 
 // User inputs a date (mm.yyyy)
@@ -129,16 +130,12 @@ void Date::delete_plans(int day, int month, int year)
     cout << "\nYou want to delete plans for " << day << "." << month << "." << year << "\n";
 }
 
-int main() 
+void Date::options(int month, int year) 
 {
-    Date date;
-    date.set_daysInMonth();
-    date.get_date();  
-    if (date.isLeapYear(date.year))
-        date.daysInMonth[2] = 29;
-    date.print_calender(date.month);
+    int day;
+    int options;
     cout << "Enter a day of the month: ";
-    cin >> date.day;
+    cin >> day;
     cout << "\nWhat do you want to do?\n";
     cout << "1. Add plans\n";
     cout << "2. Change plans\n";
@@ -147,14 +144,24 @@ int main()
     cout << "5. Enter new month\n";
     cout << "6. Enter new day\n";
     cout << "Enter option: ";
-    int options;
     cin >> options;
     switch(options) {
-        case 1: date.add_plans(date.day, date.month, date.year); break; 
-        case 2: date.change_plans(date.day, date.month, date.year); break; 
-        case 3: date.delete_plans(date.day, date.month, date.year); break; 
-        case 4: date.print_calender(date.month); break; 
+        case 1: add_plans(day, month, year); break; 
+        case 2: change_plans(day, month, year); break; 
+        case 3: delete_plans(day, month, year); break; 
+        case 4: print_calender(month); break; //options(month, year); break; 
     }
+}
+
+int main() 
+{
+    Date date;
+    date.set_daysInMonth();
+    date.get_date();  
+    if (date.isLeapYear(date.year))
+        date.daysInMonth[2] = 29;
+    date.print_calender(date.month);
+    date.options(date.month, date.year);
     
     return 0;
 }
