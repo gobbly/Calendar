@@ -18,16 +18,16 @@ class Date
 {
 public:
     int month, year, startDay;
-    int daysInMonth[13];
-    int get_date();
+    int daysInMonth[12];
+    void get_date();
     bool isLeapYear(int);
     void set_daysInMonth();
-    int findDayOfWeek(int);
+    void findDayOfWeek(int);
     //int print_calendar(int, int);
 };
 
 // User inputs a date (dd.mm.yyyy)
-int Date::get_date()
+void Date::get_date()
 {
     string line;
     // Need to implement day aswell 
@@ -72,7 +72,7 @@ void Date::set_daysInMonth()
     daysInMonth[12] = 31;
 }
 
-int Date::findDayOfWeek(int month)
+void Date::findDayOfWeek(int month)
 {
     vector<string> weekday = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
     cout << weekday[0] << "\t" << weekday[1] << "\t" << weekday[2] << "\t" << weekday[3]
@@ -86,7 +86,7 @@ int Date::findDayOfWeek(int month)
     if (month == 1)
         startDay = 0;
     else
-        startDay = findDay % 7;
+        startDay = (findDay-daysInMonth[month]) % 7;
     
     switch (month) {
         case 2:  cout << setw(startDay*8+1); break; 
@@ -106,43 +106,14 @@ int Date::findDayOfWeek(int month)
     for (int i = 1; i <= daysInMonth[month]; i++)
     {
         cout << i << "\t";
-        for (int y = 0; y <= 6; y++)
-        {
-            size_t found = weekday[y].find(weekday[6]);
-            if (found != string::npos)
-            {
-                cout << "\n";
-            }
-        }
-    }
+        if ((startDay+i) % 7 == 0)
+            cout << "\n";
 
-        /*
-        if (i <= 7 && i % (startDay+1) == 0) 
-        {
-            cout << "\n";
-        }
-        else if (i <= 14 && i % (startDay+8) == 0)
-        {
-            cout << "\n";
-        }
-        else if (i <= 21 && i % (startDay+15)  == 0)
-        {
-            cout << "\n";
-        }
-        
-        else if (i <= 28 && i % (startDay+22) == 0)
-        {
-            cout << "\n";
-        }
-        */
+    }
 
     cout << "\nStartDay: " << startDay << "\nFindDay: " << findDay;
 }
-/*
-int Date::print_calendar(int month, int startDay)
-{
-}
-*/
+
 int main() 
 {
     Date date;
@@ -151,7 +122,6 @@ int main()
     if (date.isLeapYear(date.year))
         date.daysInMonth[2] = 29;
     date.findDayOfWeek(date.month);
-//    date.print_calendar(date.month, date.startDay);
     cout << "\nDays in month: " << date.daysInMonth[date.month];
     return 0;
 }
