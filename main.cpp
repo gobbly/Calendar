@@ -119,7 +119,34 @@ void Date::print_calender(int month)
 
 void Date::add_plans(int day, int month, int year)
 {
+    vector<string> time = {"06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00",
+                          "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"};
+
+    string start_time, end_time;
+    string plans;
+    
     cout << "\nYou want to add plans for " << day << "." << month << "." << year << "\n";
+    cout << "Enter the start time of your activity: ";
+    cin >> start_time; cout << "\n";
+    cout << "Enter the end time of your activity: ";
+    cin >> end_time; cout << "\n";
+    cout << "What plans do you have?";
+    cin >> plans;
+    cout << "On " << day << "." << month << "." << year << " you have these activities planned: "; 
+
+    // NOT THE WAY
+   
+    for (unsigned int i = 0; i < time.size(); i++)
+    {
+        cout << "\t" << time[i] << "\t\t";
+        if (time[i] == time[6] || time[i] == time[12] || time[i] == time[18])
+            cout << "\n\n\n\n\n\n\n\n\n\n";
+        
+
+    }
+    
+    
+
 }
 void Date::change_plans(int day, int month, int year)
 {
