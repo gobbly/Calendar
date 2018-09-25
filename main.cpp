@@ -10,6 +10,7 @@ int main()
         date.daysInMonth[2] = 29;
     date.print_calender(date.month);
     schedule.options(date.month, date.year);
+//    schedule.print_daily_plans(schedule.day, date.month, date.year);
     
     return 0;
 }

@@ -11,5 +11,5 @@ public:
     void get_time();
     void add_plans(int, int);
     void print_weekly_plans();
-    void print_daily_plans();
+    void print_daily_plans(int, int, int);
 };
