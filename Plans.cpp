@@ -30,16 +30,21 @@ void Scheduler::get_time()
     cout << "Enter starting time(<hour> <minute>): ";
     Time start, end;
     cin >> start.hour; 
-//    cin >> start.minute;
+    cin >> start.minute;
     cout << "Enter ending time(<hour> <minute>): ";
     cin >> end.hour;
-//    cin >> end.minute;
+    cin >> end.minute;
     vector<int> time = {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
     
 //    int tempHours = end.hour - start.hour;
     for (unsigned int i = 0; i < time.size(); i++) {
         if (start.hour == time[i]) {
-            cout << "\n" << start.hour << "-" << end.hour << "\n";
+            cout << "\n" << start.hour << ":";
+            if (start.minute < 10) cout << '0';
+            cout << start.minute;
+            cout << "-" << end.hour << ":";
+            if (end.minute < 10) cout << '0';
+            cout << end.minute << "\n";
             cout << "\n" << plans;
         }
     
