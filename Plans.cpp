@@ -1,7 +1,3 @@
-#include "main.hpp"
-
-using namespace std;
-
 void Scheduler::options(int month, int year)
 {
     cout << "\n What do you want to do?\n";
@@ -21,34 +17,15 @@ void Scheduler::options(int month, int year)
 
 }
 
-struct Time {
-    int hour, minute;
-};
 
 void Scheduler::get_time()
 {
     cout << "Enter starting time(<hour> <minute>): ";
     Time start, end;
-    cin >> start.hour; 
-    cin >> start.minute;
+    cin >> start.hour; cin >> start.minute;
     cout << "Enter ending time(<hour> <minute>): ";
-    cin >> end.hour;
-    cin >> end.minute;
-    vector<int> time = {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
+    cin >> end.hour; cin >> end.minute;
     
-//    int tempHours = end.hour - start.hour;
-    for (unsigned int i = 0; i < time.size(); i++) {
-        if (start.hour == time[i]) {
-            cout << "\n" << start.hour << ":";
-            if (start.minute < 10) cout << '0';
-            cout << start.minute;
-            cout << "-" << end.hour << ":";
-            if (end.minute < 10) cout << '0';
-            cout << end.minute << "\n";
-            cout << "\n" << plans;
-        }
-    
-    }
 }
 
 void Scheduler::add_plans(int month, int year)
@@ -60,6 +37,24 @@ void Scheduler::add_plans(int month, int year)
     cin >> plans;
 }
 
+void Scheduler::print_daily_plans(Time start, Time end, int day, int month, int year)
+{
+    vector<int> time = {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
+    
+    for (int i = 0; i < 16; i++) {
+        if (start.hour == time[i]) {
+            cout << "\n" << start.hour << ":";
+            if (start.minute < 10) cout << '0';
+            cout << start.minute;
+            cout << "-" << end.hour << ":";
+            if (end.minute < 10) cout << '0';
+            cout << end.minute << "\n";
+            cout << "\n" << plans;
+        }
+    
+    }
+
+}
 
 /*vector<string> time = {"08:00", "09:00", "10:00", "11:00", "12:00", "13:00"
                            "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"
@@ -76,8 +71,5 @@ void Scheduler::delete_plans(int day, int month, int year)
 void Scheduler::print_weekly_plans()
 {
     cout << "PRINT WEEKLY\n";
-}
-void Scheduler::print_daily_plans(int day, int month, int year)
-{
 }
 */
