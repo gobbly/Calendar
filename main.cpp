@@ -8,16 +8,22 @@ class Schedule {
 private:
     int day, month, year;
     int daysInMonth[13] = { 0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
+    string plans;
 public:
-    Schedule();
-    void getDate();
-    bool isLeapYear(int y);
-    int setDaysInMonth();
-    void printCalender();
-    void printDate();
-    int calenderStartDay(int y);
-    int formatMonth(int m);
+    Schedule();                         // Default date 01/01-2018
+    void getDate();                     // User chooses date
+    bool isLeapYear(int y);             // Check if leapyear
+    int setDaysInMonth();               // TODO: 
+    void printCalender();               // Displays calender
+    void printDate();                   // Displays date
+    int calenderStartDay(int y);        // Find first day of year
+    int formatMonth(int m);             // Format calender properly by month
+    void addPlans();                    // Add plans to calender
+    void changePlans();                 // Change plans existing plans 
+    void printPlans();                  // Print existing plans
+    struct Time {int hour; int minutes; };
+    Time getTime(Time startTime);
+    
 };
 
 // ******************* Declaration Functions ******************* // 
@@ -31,6 +37,9 @@ void printMenu();
 int main() 
 {
     Schedule schedule;                              
+    Schedule::Time tempTime;
+    Schedule::Time startTime;
+    Schedule::Time endTime;
     char choice;
     schedule.setDaysInMonth(); 
     printMenu(); 
@@ -39,9 +48,18 @@ int main()
         switch (choice) {
             case 'A': schedule.getDate(); break;
             case 'B': schedule.printCalender(); break;
-            case 'C': cout << "C" << endl; break;
-            case 'D': schedule.printDate(); break;
-            case 'E': cout << "E" << endl; break;
+            case 'C': schedule.printDate(); break;
+            case 'D': 
+                cout << "Enter starting time: ";
+                startTime = schedule.getTime(tempTime); 
+                cout << "Enter ending time: ";
+                endTime = schedule.getTime(tempTime); 
+                cout << "Start: " << startTime.hour << ":" << startTime.minutes << endl;
+                cout << "End: " << endTime.hour << ":" << endTime.minutes << endl;
+                break;
+
+            case 'E': cout << "Change plans." << endl; break;
+            case 'F': cout << "Show plans." << endl; break;
             default: printMenu(); break;
         }
         choice = userChoice();
@@ -86,7 +104,7 @@ void Schedule::printDate() {                       // Prints out current date
     cout << year;
 }
 
-int Schedule::calenderStartDay(int year) {
+int Schedule::calenderStartDay(int year) {         // Finds first day of the year 
     int currentYear = year; 
     int defaultYear = 2018;
     int startDay = 0;
@@ -98,7 +116,7 @@ int Schedule::calenderStartDay(int year) {
     return startDay;
 }
 
-int Schedule::formatMonth(int month) {
+int Schedule::formatMonth(int month) {             // Returns first day of month
     int firstDayMonth = 0;
     
     // Jan: 0, Feb: 3, Mar: 3, Apr: 6, May: 1, June: 4, July: 6, Aug: 2, Sep: 5, Oct: 0, Nov: 3, Dec: 5
@@ -108,20 +126,19 @@ int Schedule::formatMonth(int month) {
     }
     return firstDayMonth;
 }
-void Schedule::printCalender()
+void Schedule::printCalender()                     // Print out monthly calender
 {
     // TODO: Use enum instead?
     int startDay = calenderStartDay(year);
     int firstDayMonth = formatMonth(month);
 
     string weekday[7] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-
-    cout << weekday[0] << "\t" << weekday[1] << "\t" << weekday[2] << "\t" 
-         << weekday[3] << "\t" << weekday[4] << "\t" << weekday[5] << "\t" 
-         << weekday[6] << "\n";
     
-    cout << setw(firstDayMonth*8+1);
-    // prints calender
+    for (int j = 0; j < 7; j++)
+        cout << weekday[j] << "\t";
+    
+    cout << "\n" << setw(((startDay + firstDayMonth)%7)*8+1);
+    
     for (int i = 1; i <= daysInMonth[month]; i++)
     {
         cout << i << "\t";
@@ -129,6 +146,25 @@ void Schedule::printCalender()
 
     }
     cout << "\n\n\n";
+}
+
+Schedule::Time Schedule::getTime(Time start) {
+    Time tempTime = start;
+    tempTime.hour = userInput(0, 23);
+    tempTime.minutes = userInput(0, 59);
+    
+    return tempTime; 
+}
+
+void Schedule::addPlans() {
+
+}
+void Schedule::changePlans() {
+
+}
+
+void Schedule::printPlans() {
+//    cout << "Plans: " << plans << "Date: " << printDate();  
 }
 
 // ***************************** Definition Functions ************************ //
@@ -152,8 +188,9 @@ int userInput(const int min, const int max) {
 void printMenu() {
     cout << "A) Change the date." << endl;
     cout << "B) Print calender." << endl;
-    cout << "C) Add plans." << endl;
-    cout << "D) Print current date." << endl;
-    cout << "E) TBA." << endl;
+    cout << "C) Print current date." << endl;
+    cout << "D) Add plans." << endl;
+    cout << "E) Change plans." << endl;
+    cout << "F) Print plans." << endl;
     cout << "Q) Quit." << endl;
 }
